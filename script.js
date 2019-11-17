@@ -70,7 +70,7 @@ var questions = [
     answer: "parentheses"
   },
   {
-    title: "What tag defines a devision or the beginning/end of an individual section in an HTML document?",
+    title: "What tag defines a division or the beginning/end of an individual section in an HTML document?",
     choices: ["<br>", "<div>", "<table>", "<meta>"],
     answer: "<div>"
   },
@@ -218,24 +218,28 @@ var newanswer2 = $("<button class='answer'>");
 var newanswer3 = $("<button class='answer'>");
 var newanswer4 = $("<button class='answer'>");
 
+let i=0;
+var len = questions.length;
+ 
 $(contentDiv).on("click", ".answer", function(event) {
     event.preventDefault();
-    newTitle.text(questions[0].title);
+    newTitle.text(questions[i].title);
     newDiv.append(newTitle);
-    newanswer1.text("a. " + questions[0].choices[0]);
+    newanswer1.text("a. " + questions[i].choices[0]);
     newDiv.append(newanswer1);
     newDiv.append("<br>");
-    newanswer2.text("b. " + questions[0].choices[1]);
+    newanswer2.text("b. " + questions[i].choices[1]);
     newDiv.append(newanswer2);
     newDiv.append("<br>");
-    newanswer3.text("c. " + questions[0].choices[2]);
+    newanswer3.text("c. " + questions[i].choices[2]);
     newDiv.append(newanswer3);
     newDiv.append("<br>");
-    newanswer4.text("d. " + questions[0].choices[3]);
+    newanswer4.text("d. " + questions[i].choices[3]);
     newDiv.append(newanswer4);
     newDiv.append("<br>");
     contentDiv.html(newDiv.html());
-
+    i++;
+    
     // var checkAns = $("<div>");
     // if (answer1.html() === questions[0].answer[0]) {
     //   checkAns.html("<p>Correct!</p>");
@@ -247,36 +251,6 @@ $(contentDiv).on("click", ".answer", function(event) {
     // questionDiv.append(checkAns);
 
 });
-
-
-// for (var i = 0; i < questions.length; i++) {
-//   answer.on("click", function(event) {
-//     event.preventDefault();
-//     newTitle.text(questions[i].title);
-//     newDiv.append(newTitle);
-//     newanswer1.text("a" + questions[i].choices[0]);
-//     newDiv.append(newanswer1);
-//     newDiv.append("<br>");
-//     newanswer2.text("b" + questions[i].choices[1]);
-//     newDiv.append(newanswer2);
-//     newDiv.append("<br>");
-//     newanswer3.text("c" + questions[i].choices[2]);
-//     newDiv.append(newanswer3);
-//     newDiv.append("<br>");
-//     newanswer4.text("d" + questions[i].choices[3]);
-//     newDiv.append(newanswer4);
-//     newDiv.append("<br>");
-
-
-//     var checkAns = $("<div>");
-//     if (ans1 === answer) {
-//       checkAns.html("<p>Correct!</p>");
-//     } else {
-//       checkAns.html("<p>Wrong!</p>");
-//     };
-//     questionDiv.append(checkAns);
-//   })
-// };
 
 
 // highScores.on("click", function(event) {
@@ -294,17 +268,10 @@ function gameOverLost() {
   contentDiv.html(gameOverDiv.html());
 }
 
-
-
-
-// var nextQuestion = $(".nextQuestion")
-// // var ansButtons = $(".ansButtons");
-
-// for (var i=0; i<questions.length; i++) {
-//   ans1.on("click", function(event) {
-//     event.preventDefault();
-//     var newQuesDiv = $("<div>");
-//     newQuesDiv.html("<h1>" + questions[i].title + "<h1>" + "<button>" + questions[i].choices[0] + "<br>" + "<button>" + questions[i].choices[1] + "<br>" + "<button>" + questions[i].choices[2] + "<br>" + "<button>" + questions[i].choices[3] + "<br>");
-//     newQuesDiv.html(newQuesDiv.html());
-//   })
-// }
+function gameOverScore() {
+  timer.text("Time: " + secondsLeft);
+  containerDiv.attr("style", "text-align: center");
+  var gameOverScoreDiv = $("<div>");
+  gameOverScoreDiv.html("<h1>" + "Game Over" + "</h1>" + "<p>" + "Score = " + secondsLeft + "</p>");
+  contentDiv.html(gameOverScoreDiv.html());
+};
