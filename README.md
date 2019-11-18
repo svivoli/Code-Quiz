@@ -35,7 +35,7 @@ https://svivoli.github.io/Code-Quiz/index.html
 
 The user is greeted with a description of the game and a form to enter their name. Once they press the start button, the timer begins counting down and the first question appears.
 
-![Question](https://i.imgur.com/e6VqMo1.jpg)
+![Question](https://i.imgur.com/jWVjNUK.png)
 
 Each question has four answer choices, each contained in their own button. Once the user clicks an answer, the next question appears, and "Correct!" or "Wrong!" should appear beneath the buttons.
 
@@ -49,9 +49,9 @@ Unresolved Errors:
 
 ![AnsCheck Error Console](https://i.imgur.com/FaEjTH2.png)
 
-This was my attempt at figuring out why my "checkAns" div, which is meant to display "Wrong" or "Correct" depending on which answer the user selects, was displaying wrong no matter what answer was selected.
-On the left is the array of questions, starting at 0.
-In the console I have printed 3 things: 
+This was my attempt at figuring out why my "checkAns" div, which is meant to display "Wrong" or "Correct" depending on which answer the user selects, was displaying wrong no matter what answer was selected.  
+On the left is the array of questions, starting at 0.  
+In the console I have printed 3 things:   
 1. $(this).html() - html content of the answer button clicked by the user 
 2. questions[i-1].answer - this gets very confusing, brace yourself. I should be printing questions[i].answer to print the answer of the current question, but for some reason the application was jumping ahead two questions after the first question was answered in terms of searching for the correct answer. However once I used the i-1 hack another problem arose in that the quiz skipped the second question (does not display its title or choices to the user) but still read its answer. This is the reason 1-3 do not match up.
 3. i - to be able to differentiate the sets of answers
