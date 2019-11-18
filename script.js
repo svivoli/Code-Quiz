@@ -1,6 +1,9 @@
 var containerDiv = $(".container");
 var contentDiv = $(".content");
+var startDiv = $(".startDiv");
 var highScores = $("#highScores");
+var playerName = $(".playerName");
+var backToGame = $("#backToGame");
 var quesContentDiv = $(".quesContent");
 var gameOverDiv = $(".gameOver");
 var pTag = $("p");
@@ -20,9 +23,11 @@ function setTime() {
     secondsLeft--;
     timer.text("Time: " + secondsLeft);
 
-    if (secondsLeft === 0) {
+    if (secondsLeft <= 0) {
       clearInterval(timerInterval);
       gameOverLost();
+      localStorage.setItem("score", secondsLeft);
+      return;
     }
 
   }, 1000);
@@ -38,23 +43,25 @@ var answer4 = $("<button class='answer'>");
 startButton.on("click", function (event) {
   event.preventDefault();
   setTime();
-  questionTitle.text("What group of tags are used to define the text headers in the body of the HTML document?");
+  questionTitle.text(questions[0].title);
   questionDiv.append(questionTitle);
-  answer1.text("a. td");
+  answer1.text(questions[0].choices[0]);
   questionDiv.append(answer1);
   questionDiv.append("<br>");
-  answer2.text("b. h1 to h6");
+  answer2.text(questions[0].choices[1]);
   questionDiv.append(answer2);
   questionDiv.append("<br>");
-  answer3.text("c. button");
+  answer3.text(questions[0].choices[2]);
   questionDiv.append(answer3);
   questionDiv.append("<br>");
-  answer4.text("d. footer");
+  answer4.text(questions[0].choices[3]);
   questionDiv.append(answer4);
   questionDiv.append("<br>");
   
   containerDiv.attr("style", "text-align: left");
   contentDiv.html(questionDiv.html());
+
+  localStorage.setItem("playerName", playerName);
 });
 
 
@@ -71,13 +78,13 @@ var questions = [
   },
   {
     title: "What tag defines a division or the beginning/end of an individual section in an HTML document?",
-    choices: ["<br>", "<div>", "<table>", "<meta>"],
-    answer: "<div>"
+    choices: ["br", "div", "table", "meta"],
+    answer: "div"
   },
   {
     title: "What tag defines the body of the HTML document, and usually includes all of the contents such as the text, hyperlinks, images, tables, lists, and more?",
-    choices: ["<br>/</br>", "<body>/</body>", "<title>/</title>", "<head>/</head>"],
-    answer: "<body>"
+    choices: ["br", "body", "title", "head"],
+    answer: "body"
   },
   {
     title: "What is the name of the stylesheet that defines the presentation of an HTML of XML document?",
@@ -100,7 +107,7 @@ var questions = [
     answer: "Box-model"
   },
   {
-    title: "What are the CSS properties that are used to ass space around sections of content?",
+    title: "What are the CSS properties that are used to add space around sections of content?",
     choices: ["Cleaner", "Padding", "Break", "Spacing"],
     answer: "Padding"
   },
@@ -155,7 +162,7 @@ var questions = [
     answer: "Infinite loop"
   },
   {
-    title: "Jay is considering adding a repetition statement within his Java programming final project. He is unsure of the number of times each loop needs to execute. Which of the statements below best fits the need identified by Jay within his programming?",
+    title: "Jay is considering adding a repetition statement within his Javascript programming final project. He is unsure of the number of times each loop needs to execute. Which of the statements below best fits the need identified by Jay within his programming?",
     choices: ["While loop", "If-else", "For loop", "Switch statement"],
     answer: "While loop"
   },
@@ -186,8 +193,8 @@ var questions = [
   },
   {
     title: "Which of the following DOES require an end tag (IS NOT an empty element)?",
-    choices: ["<img>", "<html>", "<br>", "<meta>"],
-    answer: "<html>"
+    choices: ["img", "html", "br", "meta"],
+    answer: "html"
   },
   {
     title: "Which is the proper div class for a bootstrap element that spans 12 columns on a medium display?",
@@ -218,47 +225,15 @@ var newanswer2 = $("<button class='answer'>");
 var newanswer3 = $("<button class='answer'>");
 var newanswer4 = $("<button class='answer'>");
 
-let i=0;
-var len = questions.length;
- 
-$(contentDiv).on("click", ".answer", function(event) {
-    event.preventDefault();
-    newTitle.text(questions[i].title);
-    newDiv.append(newTitle);
-    newanswer1.text("a. " + questions[i].choices[0]);
-    newDiv.append(newanswer1);
-    newDiv.append("<br>");
-    newanswer2.text("b. " + questions[i].choices[1]);
-    newDiv.append(newanswer2);
-    newDiv.append("<br>");
-    newanswer3.text("c. " + questions[i].choices[2]);
-    newDiv.append(newanswer3);
-    newDiv.append("<br>");
-    newanswer4.text("d. " + questions[i].choices[3]);
-    newDiv.append(newanswer4);
-    newDiv.append("<br>");
-    contentDiv.html(newDiv.html());
-    i++;
-    
-    // var checkAns = $("<div>");
-    // if (answer1.html() === questions[0].answer[0]) {
-    //   checkAns.html("<p>Correct!</p>");
-    // } else {
-    //   checkAns.html("<p>Wrong!</p>");
-    //   secondsLeft -10;
-    // };
-    // checkAns.attr("style", "disply: block");
-    // questionDiv.append(checkAns);
+var checkAns = $("<div class='checkAns'>");
+containerDiv.append(checkAns);
 
-});
-
-
-// highScores.on("click", function(event) {
-//   event.preventDefault();
-//   var highScoresList = $("<div>");
-//   var scoresOl = $("<ol>");
-//   highScoresList.html("<h1>" + "High Scores" + "<h1>" )
-// })
+function gameOverScore() {
+  containerDiv.attr("style", "text-align: center");
+  var gameOverScoreDiv = $("<div>");
+  gameOverScoreDiv.html("<h1>" + "Game Over" + "</h1>" + "<p>" + "Score = " + secondsLeft + "</p>");
+  contentDiv.html(gameOverScoreDiv.html());
+};
 
 function gameOverLost() {
   timer.text("Time's up!");
@@ -268,10 +243,73 @@ function gameOverLost() {
   contentDiv.html(gameOverDiv.html());
 }
 
-function gameOverScore() {
-  timer.text("Time: " + secondsLeft);
+let i=1;
+var len = questions.length;
+ 
+$(contentDiv).on("click", ".answer", function(event) {
+    event.preventDefault();
+
+    console.log($(this).html());
+    console.log(questions[i-1].answer);
+    
+    if (i >= 29) {
+      console.log("end");
+      gameOverScore();
+      localStorage.setItem("score", secondsLeft);
+      return;
+    };
+    if ($(this).html() === questions[i-1].answer) {
+      checkAns.html("<p>Correct!</p>").delay(3000).hide(1);
+      } else {
+      checkAns.html("<p>Wrong!</p>").delay(3000).hide(1);
+      secondsLeft -= 10;
+    };
+    i++
+    checkAns.attr("style", "disply: block");
+    newTitle.text(questions[i].title);
+    newDiv.html(newTitle);
+    newanswer1.text(questions[i].choices[0]);
+    newDiv.append(newanswer1);
+    newDiv.append("<br>");
+    newanswer2.text(questions[i].choices[1]);
+    newDiv.append(newanswer2);
+    newDiv.append("<br>");
+    newanswer3.text(questions[i].choices[2]);
+    newDiv.append(newanswer3);
+    newDiv.append("<br>");
+    newanswer4.text(questions[i].choices[3]);
+    newDiv.append(newanswer4);
+    newDiv.append("<br>");
+    contentDiv.html(newDiv.html());
+
+    
+
+    if ($(this).html() == questions[i-1].answer) {
+      checkAns.html("<p>Correct!</p>").delay(3000).hide(1);
+      } else {
+      checkAns.html("<p>Wrong!</p>").delay(3000).hide(1);
+      secondsLeft -= 10;
+    };
+    checkAns.attr("style", "disply: block");
+  
+});
+
+var highScoresDiv = $("<div>");
+var scoresOl = $("<ol>");
+containerDiv.attr("style", "text-align: center");
+scoresOl = ("<li>" + localStorage.getItem("playerName") + ": " + localStorage.getItem("score") + "</li>");
+highScoresDiv.html("<h1>" + "High Scores" + "<h1>" + scoresOl);
+
+highScores.on("click", function(event) {
+  event.preventDefault();
+  contentDiv.html(highScoresDiv.html());
+  backToGame.attr("style", "display: block");
+});
+
+backToGame.on("click", function(event) {
+  event.preventDefault();
   containerDiv.attr("style", "text-align: center");
-  var gameOverScoreDiv = $("<div>");
-  gameOverScoreDiv.html("<h1>" + "Game Over" + "</h1>" + "<p>" + "Score = " + secondsLeft + "</p>");
-  contentDiv.html(gameOverScoreDiv.html());
-};
+  contentDiv.html(startDiv.html());
+})
+
+

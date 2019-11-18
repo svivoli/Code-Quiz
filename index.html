@@ -16,7 +16,8 @@
 <body>
 
     <nav class="navbar navbar-light bg-white">
-        <a id="highScores" class="navbar-brand" href="#">View Highscores</a>
+        <a id="highScores" class="navbar-brand" href="#">View High Scores</a>
+        <a id="backToGame" class="navbar-brand" href="#">Back to Game</a>
         <div class="time">
             <p id="timer"></p>
         </div>
@@ -24,11 +25,18 @@
 
     <div class="container">
         <div class="content">
+            <div class="startDiv">
             <h1>Coding Quiz</h1>
             <p>Answer the following questions about coding. The time will count down from 95 seconds and is a reflection
                 of your score. Wrong answers will deduct 10 seconds from your time. There are 30 questions. Good luck!</p>
             <br>
+            <form>
+                Enter Name:
+                <input type="text" name="firstname" class="playerName" value="Princess Zelda"><br>
+              </form>
+            <br>
             <button type="submit" class="start" class="btn btn-primary">Start Quiz</button>
+        </div>
         </div>
         <!-- <div class="questionDiv">
             <h1 class="nextQuestion">What group of tags are used to define the text headers in the body of the HTML document?</h1>
