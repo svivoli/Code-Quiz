@@ -231,7 +231,8 @@ containerDiv.append(checkAns);
 function gameOverScore() {
   containerDiv.attr("style", "text-align: center");
   var gameOverScoreDiv = $("<div>");
-  gameOverScoreDiv.html("<h1>" + "Game Over" + "</h1>" + "<p>" + "Score = " + secondsLeft + "</p>");
+  localStorage.setItem("score", secondsLeft)
+  gameOverScoreDiv.html("<h1>" + "Game Over" + "</h1>" + "<p>" + "Score = " + localStorage.getItem("score") + "</p>");
   contentDiv.html(gameOverScoreDiv.html());
 };
 
@@ -251,6 +252,7 @@ $(contentDiv).on("click", ".answer", function(event) {
 
     console.log($(this).html());
     console.log(questions[i-1].answer);
+    console.log(i-1);
     
     if (i >= 29) {
       console.log("end");
@@ -260,10 +262,11 @@ $(contentDiv).on("click", ".answer", function(event) {
     };
     if ($(this).html() === questions[i-1].answer) {
       checkAns.html("<p>Correct!</p>").delay(3000).hide(1);
-      } else {
+    } else {
       checkAns.html("<p>Wrong!</p>").delay(3000).hide(1);
-      secondsLeft -= 10;
+      secondsLeft - 10;
     };
+    checkAns.attr("style", "disply: block");
     i++
     checkAns.attr("style", "disply: block");
     newTitle.text(questions[i].title);
@@ -281,16 +284,6 @@ $(contentDiv).on("click", ".answer", function(event) {
     newDiv.append(newanswer4);
     newDiv.append("<br>");
     contentDiv.html(newDiv.html());
-
-    
-
-    if ($(this).html() == questions[i-1].answer) {
-      checkAns.html("<p>Correct!</p>").delay(3000).hide(1);
-      } else {
-      checkAns.html("<p>Wrong!</p>").delay(3000).hide(1);
-      secondsLeft -= 10;
-    };
-    checkAns.attr("style", "disply: block");
   
 });
 
