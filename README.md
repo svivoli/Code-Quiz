@@ -35,7 +35,7 @@ https://svivoli.github.io/Code-Quiz/index.html
 
 The user is greeted with a description of the game and a form to enter their name. Once they press the start button, the timer begins counting down and the first question appears.
 
-![Question](https://i.imgur.com/kpuSziW.jpg)
+![Question](https://i.imgur.com/e6VqMo1.jpg)
 
 Each question has four answer choices, each contained in their own button. Once the user clicks an answer, the next question appears, and "Correct!" or "Wrong!" should appear beneath the buttons.
 
@@ -55,7 +55,7 @@ In the console I have printed 3 things:
 2. questions[i-1].answer - this gets very confusing, brace yourself. I should be printing questions[i].answer to print the answer of the current question, but for some reason the application was jumping ahead two questions after the first question was answered in terms of searching for the correct answer. However once I used the i-1 hack another problem arose in that the quiz skips the second question (does not display its title or choices to the user) but still reads its answer. This is the reason 1-3 are not matched up.
 3. i - to be able to differentiate the sets of answers
 
-![High Scores Error](https://i.imgur.com/DLcabof.jpg)
+![High Scores Error](https://i.imgur.com/UQWUwNr.png)
 
 This is what is supposed to be the high scores page. With jQuery I have made an onclick event handler for the View High Scores link in the navbar that creates a div containing the title and an empty list to be filled with high scores. The list is supposed to retrieve names and high scores from local storage set earlier in the code. It does so successfully with the score but not with the user's name. I am assuming this has something to do with the fact that the user's name was entered via an html form and is being retrieved via jQuery.
 
