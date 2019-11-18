@@ -25,21 +25,21 @@ Components:
 
 ### Links to Project
 
-https://github.com/svivoli/Code-Quiz
+https://github.com/svivoli/Code-Quiz  
 https://svivoli.github.io/Code-Quiz/index.html
 
 
 ### User Experience
 
-![Start game](https://i.imgur.com/undefined.png)
+![Start game](https://i.imgur.com/HpGTYuc.jpg)
 
 The user is greeted with a description of the game and a form to enter their name. Once they press the start button, the timer begins counting down and the first question appears.
 
-![Question](https://i.imgur.com/undefined.png)
+![Question](https://i.imgur.com/kpuSziW.jpg)
 
 Each question has four answer choices, each contained in their own button. Once the user clicks an answer, the next question appears, and "Correct!" or "Wrong!" should appear beneath the buttons.
 
-![Game Over](https://i.imgur.com/undefined.png)
+![Game Over](https://i.imgur.com/Fgow3av.jpg)
 
 If a user does not reach the end of the questions before the time is up, a "Game Over" message is displayed, and their score is 0.
 
