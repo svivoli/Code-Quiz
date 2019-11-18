@@ -13,14 +13,14 @@ Components:
 3. Original start page created in html document
 - h1, p, form, button
 4. jQuery generated child divs
-5. JQuery generated titles (questions)
+5. jQuery generated titles (questions)
 - questions (30), choices (4 per question), correct answer stored in array
 6. jQuery generated buttons
 - jQuery on click functions to start game and switch to next question
 7. jQuery generated "Game Over" div when timer reaches 0 or when all questions have been answered
 8. Local storage variable for high scores using user-inputted name and time left on timer once all questions have been answered
 9. Global iterator used to access elements in the array
-- incremented without a for loop using a local iterator and if statements
+- incremented without a for loop using a local increment and if statements
 9. Super cool background image
 
 ### Links to Project
