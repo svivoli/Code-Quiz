@@ -264,7 +264,7 @@ $(contentDiv).on("click", ".answer", function(event) {
       checkAns.html("<p>Correct!</p>").delay(3000).hide(1);
     } else {
       checkAns.html("<p>Wrong!</p>").delay(3000).hide(1);
-      secondsLeft - 10;
+      secondsLeft -= 10;
     };
     checkAns.attr("style", "disply: block");
     i++
