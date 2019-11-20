@@ -26,7 +26,7 @@ Components:
 ### Links to Project
 
 https://github.com/svivoli/Code-Quiz  
-https://svivoli.github.io/Code-Quiz/index.html
+https://svivoli.github.io/Code-Quiz/
 
 
 ### User Experience
