@@ -2,7 +2,7 @@ var containerDiv = $(".container");
 var contentDiv = $(".content");
 var startDiv = $(".startDiv");
 var highScores = $("#highScores");
-var playerName = $(".playerName");
+var playerName = $(".playerName")[0].value;
 var backToGame = $("#backToGame");
 var quesContentDiv = $(".quesContent");
 var gameOverDiv = $(".gameOver");
@@ -15,7 +15,7 @@ var score = $("#score");
 var checkAnsDiv = $(".checkAnswer");
 var questionTag = $(".question");
 
-var secondsLeft = 95;
+var secondsLeft = 100;
 
 timer.text("Time: " + secondsLeft);
 
@@ -26,8 +26,8 @@ function setTime() {
 
     if (secondsLeft <= 0) {
       clearInterval(timerInterval);
-      gameOverLost();
       localStorage.setItem("score", secondsLeft);
+      gameOverLost();
       return;
     }
 
@@ -73,19 +73,9 @@ var questions = [
     answer: "alerts"
   },
   {
-    title: "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses"
-  },
-  {
     title: "What tag defines a division or the beginning/end of an individual section in an HTML document?",
     choices: ["br", "div", "table", "meta"],
     answer: "div"
-  },
-  {
-    title: "What tag defines the body of the HTML document, and usually includes all of the contents such as the text, hyperlinks, images, tables, lists, and more?",
-    choices: ["br", "body", "title", "head"],
-    answer: "body"
   },
   {
     title: "What is the name of the stylesheet that defines the presentation of an HTML of XML document?",
@@ -98,24 +88,9 @@ var questions = [
     answer: "Head"
   },
   {
-    title: "What is the name of the property that is used to define the special state of an element?",
-    choices: ["Pseudo-class", "Syntax", "Alignment", "Style"],
-    answer: "Pseudo-class"
-  },
-  {
-    title: "What is the box called in CSS that wraps around every HTML element?",
-    choices: ["Float", "Boundary", "Wrap", "Box-model"],
-    answer: "Box-model"
-  },
-  {
     title: "What are the CSS properties that are used to add space around sections of content?",
     choices: ["Cleaner", "Padding", "Break", "Spacing"],
     answer: "Padding"
-  },
-  {
-    title: "What is the name given to the CSS element that starts on the same line and only takes up as much width (space) as necessary?",
-    choices: ["Block-level", "Line", "Inline", "Spacer"],
-    answer: "Inline"
   },
   {
     title: "What is the value called that defines colors such as the following: #FFFF00?",
@@ -143,16 +118,6 @@ var questions = [
     answer: "JSON"
   },
   {
-    title: "What can loops offer JavaScript code as a whole?",
-    choices: ["Cross-platform support.", "Cleaner syntax.", "Added plug-ins.", "Improved performance."],
-    answer: "Improved performance."
-  },
-  {
-    title: "In JavaScript, what element is used to store and manipulate text, usually in multiples?",
-    choices: ["Recorders", "Variables", "Arrays", "Strings"],
-    answer: "Strings"
-  },
-  {
     title: "What is a Javascript element that represents either TRUE or FALSE?",
     choices: ["Variable", "Event", "Condition", "Boolean"],
     answer: "Boolean"
@@ -161,16 +126,6 @@ var questions = [
     title: "A loop that never ends is referred to as a(n) ___.",
     choices: ["While loop", "Infinite loop", "Recursive loop", "For loop"],
     answer: "Infinite loop"
-  },
-  {
-    title: "Jay is considering adding a repetition statement within his Javascript programming final project. He is unsure of the number of times each loop needs to execute. Which of the statements below best fits the need identified by Jay within his programming?",
-    choices: ["While loop", "If-else", "For loop", "Switch statement"],
-    answer: "While loop"
-  },
-  {
-    title: "___ is the process of finding errors and fixing them within a program.",
-    choices: ["Compiling", "Executing", "Debugging", "Scanning"],
-    answer: "Debugging"
   },
   {
     title: "Which of the following is not a required part of a for loop?",
@@ -186,11 +141,6 @@ var questions = [
     title: "Which is the proper way to reference a class in the CSS document?",
     choices: ["#className {}", "className {}", ".className {}", "@className {}"],
     answer: ".className {}"
-  },
-  {
-    title: "Which command is used to push changes to GitHub from terminal?",
-    choices: ["git pwd", "git push add", "git init", "git push origin master"],
-    answer: "git push origin master"
   },
   {
     title: "Which of the following DOES require an end tag (IS NOT an empty element)?",
@@ -232,7 +182,7 @@ containerDiv.append(checkAns);
 function gameOverScore() {
   containerDiv.attr("style", "text-align: center");
   var gameOverScoreDiv = $("<div>");
-  localStorage.setItem("score", secondsLeft)
+  localStorage.setItem("score", secondsLeft);
   gameOverScoreDiv.html("<h1>" + "Game Over" + "</h1>" + "<p>" + "Score = " + localStorage.getItem("score") + "</p>");
   contentDiv.html(gameOverScoreDiv.html());
 };
@@ -255,7 +205,7 @@ $(contentDiv).on("click", ".answer", function(event) {
     console.log(questions[i-1].answer);
     console.log(i-1);
     
-    if (i >= 29) {
+    if (i >= 20) {
       console.log("end");
       gameOverScore();
       localStorage.setItem("score", secondsLeft);
@@ -288,17 +238,20 @@ $(contentDiv).on("click", ".answer", function(event) {
 });
 
 var highScoresDiv = $("<div>");
-var scoresOl = $("<ol>");
+var scores = $("<div>");
 var player = localStorage.getItem("playerName");
+var playerList = [];
+playerList.unshift(player);
 var highScore = localStorage.getItem("score");
-scoresOl = ("<li>" + player + ": " + highScore + "</li>");
-highScoresDiv.attr("style", "list-style: none");
-highScoresDiv.html("<h1>" + "High Scores" + "</h1>" + scoresOl);
+var highScoreList = [];
+highScoreList.unshift(highScore);
+highScoresDiv.html("<h1>" + "High Scores" + "</h1>");
 
 highScores.on("click", function(event) {
   event.preventDefault();
   containerDiv.attr("style", "text-align: center");
   contentDiv.html(highScoresDiv.html());
+  highScoresDiv.append("<br>" + "<h5>" + playerList[0] + ": " + highScoreList[0] + "</h5>");
 });
 
 // backToGame.on("click", function(event) {
