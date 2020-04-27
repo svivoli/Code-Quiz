@@ -6,6 +6,7 @@ var playerName = $(".playerName");
 var backToGame = $("#backToGame");
 var quesContentDiv = $(".quesContent");
 var gameOverDiv = $(".gameOver");
+var highScoresList = $(".highScoresList");
 var pTag = $("p");
 var h1Tag = $("h1");
 var timer = $("#timer");
@@ -267,7 +268,6 @@ $(contentDiv).on("click", ".answer", function(event) {
       secondsLeft -= 10;
     };
     checkAns.attr("style", "disply: block");
-    i++
     checkAns.attr("style", "disply: block");
     newTitle.text(questions[i].title);
     newDiv.html(newTitle);
@@ -284,25 +284,27 @@ $(contentDiv).on("click", ".answer", function(event) {
     newDiv.append(newanswer4);
     newDiv.append("<br>");
     contentDiv.html(newDiv.html());
-  
+    i++
 });
 
 var highScoresDiv = $("<div>");
 var scoresOl = $("<ol>");
-containerDiv.attr("style", "text-align: center");
-scoresOl = ("<li>" + localStorage.getItem("playerName") + ": " + localStorage.getItem("score") + "</li>");
-highScoresDiv.html("<h1>" + "High Scores" + "<h1>" + scoresOl);
+var player = localStorage.getItem("playerName");
+var highScore = localStorage.getItem("score");
+scoresOl = ("<li>" + player + ": " + highScore + "</li>");
+highScoresDiv.attr("style", "list-style: none");
+highScoresDiv.html("<h1>" + "High Scores" + "</h1>" + scoresOl);
 
 highScores.on("click", function(event) {
   event.preventDefault();
+  containerDiv.attr("style", "text-align: center");
   contentDiv.html(highScoresDiv.html());
-  backToGame.attr("style", "display: block");
 });
 
-backToGame.on("click", function(event) {
-  event.preventDefault();
-  containerDiv.attr("style", "text-align: center");
-  contentDiv.html(startDiv.html());
-})
+// backToGame.on("click", function(event) {
+//   event.preventDefault();
+//   containerDiv.attr("style", "text-align: center");
+//   contentDiv.html(startDiv.html());
+// })
 
 

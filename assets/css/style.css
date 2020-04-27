@@ -53,6 +53,13 @@ button {
 }
 
 #backToGame {
-    display: none;
     float: left;
+}
+
+.highScoresList {
+    list-style: none;
+}
+
+.highScores {
+    display: none;
 }
