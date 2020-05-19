@@ -1,5 +1,10 @@
 # Code Quiz
 
+### Links to Project
+
+https://github.com/svivoli/Code-Quiz  
+https://svivoli.github.io/Code-Quiz/
+
 ### Description
 
 The purpose of this project was to create an interactive timed quiz that generates questions pertaining to HTML, CSS, and Javascript. This can be used as a study tool or a fun way to test one's knowledge of coding. The user answers questions by clicking buttons and is taken to the next question on the click of their answer. They quiz is timed from its start and each wrong answer reduces the time by 10 seconds. The time remaining on the clock once they have answered all of the questions is their final score. Names and high scores are saved and can be accessed by the user.
@@ -22,12 +27,6 @@ Components:
 9. Global iterator used to access elements in the array
 - incremented without a for loop using a local increment and if statements
 9. Super cool background image
-
-### Links to Project
-
-https://github.com/svivoli/Code-Quiz  
-https://svivoli.github.io/Code-Quiz/
-
 
 ### User Experience
 
